@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🔍 Social Tracker Pro</title>
+  <title>🔍 Social Tracke Caryz</title>
   <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <style>
@@ -25,7 +25,7 @@
       position: relative;
     }
 
-    /* Efek bintang kecil (dekorasi) */
+    /* Efek bintang */
     body::before {
       content: '';
       position: fixed;
@@ -48,7 +48,7 @@
       -webkit-backdrop-filter: blur(18px);
       border-radius: 56px;
       padding: 44px 38px;
-      max-width: 620px;
+      max-width: 640px;
       width: 100%;
       box-shadow: 0 30px 60px -12px rgba(0,0,0,0.9), inset 0 0 0 1px rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.02);
@@ -145,7 +145,7 @@
       font-size: 18px;
     }
 
-    /* ===== LOADING (dengan status teks) ===== */
+    /* ===== LOADING ===== */
     .loader {
       display: none;
       flex-direction: column;
@@ -250,6 +250,22 @@
       margin-right: 6px;
       color: #6c8bc0;
     }
+    .result-item .last-online {
+      font-size: 13px;
+      color: #7a8fb0;
+      margin-top: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .result-item .last-online i {
+      font-size: 12px;
+      color: #4f9fff;
+    }
+    .result-item .last-online .online-now {
+      color: #4ade80;
+      font-weight: 500;
+    }
 
     /* Warna ikon platform */
     .icon-instagram { color: #E4405F; }
@@ -257,8 +273,6 @@
     .icon-telegram { color: #26A5E4; }
     .icon-twitter { color: #1DA1F2; }
     .icon-tiktok { color: #000; background: #fff; border-radius: 10px; }
-    .icon-whatsapp { color: #25D366; }
-    .icon-youtube { color: #FF0000; }
     .icon-snapchat { color: #FFFC00; }
     .icon-discord { color: #5865F2; }
 
@@ -290,18 +304,18 @@
 <div class="card">
 
   <h1>
-    <i class="fas fa-user-secret"></i> Social Caryz Tracker
+    <i class="fas fa-user-secret"></i>  Media Social Stalking 😁🤙🏻
   </h1>
-  <div class="sub">🔍 Masukkan nomor untuk mencari akun media sosial </div>
+  <div class="sub">🔍 Anjingna Nomor untuk mengetahui akun media sosial e ya kirik
 
   <div class="input-group">
-    <input type="tel" id="phoneInput" placeholder="+62 812 3456 7890" />
+    <input type="tel" id="phoneInput" placeholder="NDI NOMERE NYET " />
     <button id="searchBtn">
       <i class="fas fa-search"></i> Lacak
     </button>
   </div>
 
-  <!-- Loading dengan status berubah -->
+  <!-- Loading -->
   <div class="loader" id="loader">
     <div class="spinner"></div>
     <div class="status-text" id="statusText">
@@ -313,45 +327,67 @@
   <div class="results" id="results"></div>
 
   <div class="footer">
-    <i class="fas fa-shield-alt"></i> kirikkkk🗿🤙🏻
+    <i class="fas fa-shield-alt"></i> ASCII.SQL.Caryz.Nexus 👁️👄👁️
   </div>
 </div>
 
 <script>
   (function() {
-    // ---------- Daftar platform (tanpa Free Fire) ----------
+    // ---------- Daftar platform (tanpa WhatsApp, tanpa YouTube) ----------
     const PLATFORMS = [
       { name: 'Instagram', icon: 'fab fa-instagram', cssClass: 'icon-instagram' },
       { name: 'Facebook', icon: 'fab fa-facebook', cssClass: 'icon-facebook' },
-      { name: 'Telegram', icon: 'fab fa-telegram-plane', cssClass: 'icon-telegram' },
       { name: 'Twitter / X', icon: 'fab fa-twitter', cssClass: 'icon-twitter' },
+      { name: 'Telegram', icon: 'fab fa-telegram-plane', cssClass: 'icon-telegram' },
       { name: 'TikTok', icon: 'fab fa-tiktok', cssClass: 'icon-tiktok' },
-      { name: 'WhatsApp', icon: 'fab fa-whatsapp', cssClass: 'icon-whatsapp' },
-      { name: 'YouTube', icon: 'fab fa-youtube', cssClass: 'icon-youtube' },
       { name: 'Snapchat', icon: 'fab fa-snapchat-ghost', cssClass: 'icon-snapchat' },
       { name: 'Discord', icon: 'fab fa-discord', cssClass: 'icon-discord' }
     ];
 
-    // ---------- Nama perempuan Indonesia (25) ----------
-    const NAMES = [
-      'Metha yvz'
+    // ---------- Daftar waktu "Terakhir online" yang realistis ----------
+    const LAST_ONLINE_OPTIONS = [
+      { label: 'Online sekarang', class: 'online-now', icon: 'fa-circle' },
+      { label: '5 menit lalu', class: '', icon: 'fa-clock' },
+      { label: '15 menit lalu', class: '', icon: 'fa-clock' },
+      { label: '1 jam lalu', class: '', icon: 'fa-clock' },
+      { label: '2 jam lalu', class: '', icon: 'fa-clock' },
+      { label: 'Hari ini 08:30', class: '', icon: 'fa-calendar-day' },
+      { label: 'Hari ini 12:45', class: '', icon: 'fa-calendar-day' },
+      { label: 'Hari ini 16:20', class: '', icon: 'fa-calendar-day' },
+      { label: 'Kemarin 19:10', class: '', icon: 'fa-calendar-alt' },
+      { label: 'Kemarin 22:00', class: '', icon: 'fa-calendar-alt' },
+      { label: '2 hari lalu', class: '', icon: 'fa-calendar-alt' },
+      { label: '3 hari lalu', class: '', icon: 'fa-calendar-alt' },
+      { label: '5 hari lalu', class: '', icon: 'fa-calendar-alt' },
+      { label: '1 minggu lalu', class: '', icon: 'fa-calendar-alt' }
     ];
 
-    // ---------- Generate username mirip nama perempuan ----------
+    // ---------- Generate username berbasis "Metha" dengan gaya Gen Z ----------
     function generateUsername() {
-      const name = NAMES[Math.floor(Math.random() * NAMES.length)];
+      const base = 'Metha';
       const patterns = [
-        () => name,
-        () => name + Math.floor(Math.random() * 99 + 1),
-        () => name + '_' + Math.floor(Math.random() * 99 + 1),
-        () => name + '.' + Math.floor(Math.random() * 99 + 1),
-        () => name + '_official',
-        () => name + '_real',
-        () => name.toLowerCase(),
-        () => name.toLowerCase() + Math.floor(Math.random() * 99 + 1),
-        () => name + Math.floor(Math.random() * 900 + 100)
+        () => base,
+        () => base + Math.floor(Math.random() * 99 + 1),
+        () => base + '_' + Math.floor(Math.random() * 99 + 1),
+        () => base + '.' + Math.floor(Math.random() * 99 + 1),
+        () => base + '_official',
+        () => base + '_real',
+        () => base.toLowerCase(),
+        () => base.toLowerCase() + Math.floor(Math.random() * 99 + 1),
+        () => base + Math.floor(Math.random() * 900 + 100),
+        () => 'its' + base,
+        () => 'mrs' + base,
+        () => 'iam' + base,
+        () => base + 'xz',
+        () => base + 'y',
+        () => base + '_' + ['id', 'my', 'official', 'real', 'lover', 'girly'][Math.floor(Math.random() * 6)]
       ];
       return patterns[Math.floor(Math.random() * patterns.length)]();
+    }
+
+    // ---------- Pilih waktu online acak ----------
+    function getRandomLastOnline() {
+      return LAST_ONLINE_OPTIONS[Math.floor(Math.random() * LAST_ONLINE_OPTIONS.length)];
     }
 
     // ---------- Render hasil ----------
@@ -360,6 +396,7 @@
       container.innerHTML = '';
       platforms.forEach(p => {
         const username = generateUsername();
+        const lastOnline = getRandomLastOnline();
         const item = document.createElement('div');
         item.className = 'result-item';
         item.innerHTML = `
@@ -369,6 +406,10 @@
           <div class="info">
             <div class="platform">${p.name}</div>
             <div class="username"><i class="fas fa-at"></i> ${username}</div>
+            <div class="last-online">
+              <i class="fas ${lastOnline.icon}"></i>
+              <span class="${lastOnline.class}">${lastOnline.label}</span>
+            </div>
           </div>
         `;
         container.appendChild(item);
@@ -395,25 +436,20 @@
         return;
       }
 
-      // Sembunyikan hasil, tampilkan loading
       const resultsDiv = document.getElementById('results');
       resultsDiv.style.display = 'none';
       const loader = document.getElementById('loader');
       loader.style.display = 'flex';
       const statusEl = document.getElementById('statusText');
 
-      // Nonaktifkan tombol
       const btn = document.getElementById('searchBtn');
       btn.disabled = true;
       btn.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Mencari...';
 
-      // Mulai step status
       let step = 0;
       const totalSteps = STATUS_STEPS.length;
-      // Tampilkan step pertama langsung
       statusEl.innerHTML = `<i class="fas ${STATUS_STEPS[0].icon} fa-fw"></i> ${STATUS_STEPS[0].text}`;
 
-      // Interval setiap 1.2 detik (total 5 step = 6 detik)
       const interval = setInterval(() => {
         step++;
         if (step < totalSteps) {
@@ -421,7 +457,6 @@
         }
       }, 1200);
 
-      // Setelah 6 detik (5 step * 1.2s = 6000ms)
       setTimeout(() => {
         clearInterval(interval);
         loader.style.display = 'none';
